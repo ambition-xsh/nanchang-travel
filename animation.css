@@ -1,0 +1,232 @@
+@keyframes float-poem {
+    0% {
+      transform: translate(0, 0) rotate(var(--rotate));
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--moveX), var(--moveY)) rotate(var(--rotate));
+      opacity: 0;
+    }
+  }
+  
+  .poem {
+    position: absolute;
+    font-size: 1.2rem;
+    color: #8b4513;
+    white-space: nowrap;
+    pointer-events: none;
+    font-family: "Noto Sans SC", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  .poem-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  /* 入场动画容器 */
+  .entry-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #e60012;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  /* 英雄城标志动画 */
+  .hero-city-symbol {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: url('https://imgform.oss-cn-hangzhou.aliyuncs.com/nanchang/hero-city.png') no-repeat center;
+    background-size: contain;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: symbolAppear 1.5s ease-out forwards;
+  }
+  
+  /* 城市剪影动画 */
+  .city-silhouette {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('https://imgform.oss-cn-hangzhou.aliyuncs.com/nanchang/city-silhouette.png') no-repeat center;
+    background-size: cover;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: silhouetteAppear 2s ease-out 0.5s forwards;
+  }
+  
+  /* 动态光效 */
+  .light-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: lightSweep 2s ease-in-out 1s forwards;
+  }
+  
+  /* 文字动画容器 */
+  .city-name {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    top: 35%;
+    transform: translateY(-50%);
+  }
+  
+  /* 单个文字动画 */
+  .city-name span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .city-name span:nth-child(1) { animation: letterBounce 0.5s ease-out 1.5s forwards; }
+  .city-name span:nth-child(2) { animation: letterBounce 0.5s ease-out 1.7s forwards; }
+  .city-name span:nth-child(3) { animation: letterBounce 0.5s ease-out 1.9s forwards; }
+  .city-name span:nth-child(4) { animation: letterBounce 0.5s ease-out 2.1s forwards; }
+  
+  .city-slogan {
+    position: absolute;
+    font-size: 1.5rem;
+    color: #fff;
+    top: 45%;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: textAppear 1.5s ease-out 2.3s forwards;
+  }
+  
+  /* 动画关键帧 */
+  @keyframes symbolAppear {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes silhouetteAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 0.8;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes lightSweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes letterBounce {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes textAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 页面切换动画 */
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  
+  /* 卡片翻转动画 */
+  .card-flip {
+    perspective: 1000px;
+  }
+  
+  .card-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .card-flip:hover .card-flip-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card-back {
+    transform: rotateY(180deg);
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
